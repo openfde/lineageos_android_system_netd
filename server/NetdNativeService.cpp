@@ -899,6 +899,11 @@ binder::Status NetdNativeService::interfaceGetCfg(
 }
 
 binder::Status NetdNativeService::interfaceSetCfg(const InterfaceConfigurationParcel& cfg) {
+    if (true) {
+        ALOGE("interfaceSetCfg do nothing");
+        return binder::Status::ok();
+    }
+
     NETD_LOCKING_RPC(InterfaceController::mutex, PERM_NETWORK_STACK, PERM_MAINLINE_NETWORK_STACK);
     auto entry = gLog.newEntry()
                          .prettyFunction(__PRETTY_FUNCTION__)
@@ -919,6 +924,11 @@ binder::Status NetdNativeService::interfaceSetIPv6PrivacyExtensions(const std::s
 }
 
 binder::Status NetdNativeService::interfaceClearAddrs(const std::string& ifName) {
+    if (true) {
+        ALOGE("interfaceClearAddrs do nothing");
+        return binder::Status::ok();
+    }
+
     NETD_LOCKING_RPC(InterfaceController::mutex, PERM_NETWORK_STACK, PERM_MAINLINE_NETWORK_STACK);
     int res = InterfaceController::clearAddrs(ifName.c_str());
     return statusFromErrcode(res);

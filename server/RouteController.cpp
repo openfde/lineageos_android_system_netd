@@ -1030,6 +1030,9 @@ int RouteController::flushRoutes(const char* interface) {
 }
 
 int RouteController::Init(unsigned localNetId) {
+    if (true) {
+        return 0;
+    }
     if (int ret = flushRules()) {
         return ret;
     }
