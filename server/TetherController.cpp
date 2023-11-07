@@ -36,6 +36,7 @@
 #include <vector>
 
 #define LOG_TAG "TetherController"
+#include <android-base/properties.h>
 #include <android-base/scopeguard.h>
 #include <android-base/stringprintf.h>
 #include <android-base/strings.h>
@@ -61,6 +62,7 @@ namespace android {
 namespace net {
 
 using android::base::Error;
+using android::base::GetIntProperty;
 using android::base::Join;
 using android::base::Pipe;
 using android::base::Result;
@@ -167,7 +169,9 @@ TetherController::TetherController() {
     if (inBpToolsMode()) {
         enableForwarding(BP_TOOLS_MODE);
     } else {
-        setIpFwdEnabled();
+        if (GetIntProperty("persist.fde.tether", 0)) {
+            setIpFwdEnabled();
+        }
     }
     maybeInitMaps();
 }
